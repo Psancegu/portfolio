@@ -1,0 +1,108 @@
+/* --- RESETEO BÁSICO --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- ESTILOS GENERALES --- */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  color: #222;
+}
+
+/* --- BARRA LATERAL --- */
+.sidebar {
+  width: 25%;
+  background-color: #1b1f24;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 1rem;
+  position: fixed;
+  height: 100vh;
+}
+
+.sidebar h1 {
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.socials a {
+  color: #fff;
+  margin: 0 0.5rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.socials a:hover {
+  text-decoration: underline;
+}
+
+/* --- CONTENIDO PRINCIPAL --- */
+.content {
+  margin-left: 25%;
+  width: 75%;
+  overflow-y: auto;
+  padding: 2rem;
+  scroll-behavior: smooth;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: #1b1f24;
+  border: 2px solid #1b1f24;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  background-color: #1b1f24;
+  color: #fff;
+}
+
+/* --- SECCIONES --- */
+section {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+/* Mostrar solo la sección activa */
+section:target {
+  display: block;
+}
+
+/* Mostrar educación solo si no hay ninguna otra seleccionada */
+body:not(:has(:target)) #educacion {
+  display: block;
+}
+
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  .content {
+    margin-left: 0;
+    width: 100%;
+  }
+}
