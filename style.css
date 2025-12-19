@@ -1,11 +1,11 @@
-/* --- RESETEO BÁSICO --- */
+/* --- BASIC RESET --- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* --- ESTILOS GENERALES --- */
+/* --- GENERAL STYLES --- */
 body {
   font-family: Arial, sans-serif;
   display: flex;
@@ -14,7 +14,7 @@ body {
   color: #222;
 }
 
-/* --- BARRA LATERAL --- */
+/* --- SIDEBAR --- */
 .sidebar {
   width: 25%;
   background-color: #1b1f24;
@@ -34,17 +34,21 @@ body {
 }
 
 .socials a {
-  color: #fff;
   margin: 0 0.5rem;
-  text-decoration: none;
-  font-weight: bold;
+  display: inline-block;
 }
 
-.socials a:hover {
-  text-decoration: underline;
+.socials img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
 }
 
-/* --- CONTENIDO PRINCIPAL --- */
+.socials a:hover img {
+  transform: scale(1.1);
+}
+
+/* --- MAIN CONTENT --- */
 .content {
   margin-left: 25%;
   width: 75%;
@@ -66,28 +70,98 @@ nav a {
   border: 2px solid #1b1f24;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 1s ease;
+}
+
+nav a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #1b1f24;
+  z-index: -1;
+  transition: width 1s ease;
 }
 
 nav a:hover {
-  background-color: #1b1f24;
   color: #fff;
 }
 
-/* --- SECCIONES --- */
+nav a:hover::before {
+  width: 100%;
+}
+
+/* --- SECTIONS --- */
 section {
   display: none;
   animation: fadeIn 0.5s ease;
 }
 
-/* Mostrar solo la sección activa */
+/* Show only the active section */
 section:target {
   display: block;
 }
 
-/* Mostrar educación solo si no hay ninguna otra seleccionada */
-body:not(:has(:target)) #educacion {
+/* Show education only if no other is selected */
+body:not(:has(:target)) #education {
   display: block;
+}
+
+/* --- SKILLS GRID --- */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.skill-card {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.skill-card h3 {
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.skill-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.skill-level {
+  height: 100%;
+  background-color: #1b1f24;
+  width: 0;
+  /* Starts at 0 */
+  border-radius: 5px;
+  animation: fillBar 1.5s ease-out forwards;
+  animation-delay: 0.3s;
+  /* Slight delay to let section fade in first */
+}
+
+@keyframes fillBar {
+  to {
+    width: var(--width);
+  }
 }
 
 
@@ -96,11 +170,13 @@ body:not(:has(:target)) #educacion {
   body {
     flex-direction: column;
   }
+
   .sidebar {
     position: relative;
     width: 100%;
     height: auto;
   }
+
   .content {
     margin-left: 0;
     width: 100%;
